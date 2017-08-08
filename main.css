@@ -1,0 +1,585 @@
+@charset "utf-8";
+
+@font-face{
+  font-weight: 400;
+  font-style: normal;
+  font-family: "Stem Text";
+  src: url("./fonts/StemText.woff") format("woff");
+}
+
+@font-face{
+  font-weight: 700;
+  font-style: normal;
+  font-family: "Stem Text";
+  src: url("./fonts/StemTextBold.woff") format("woff");
+}
+
+@font-face{
+  font-family: "Fira Code";
+  src: url("./fonts/FiraCode-Regular.woff") format("woff");
+}
+/* Reset
+----------------------------------------------------------------------------- */
+/* stylelint-disable */
+html, body, h1, h2, h3, h4, h5, h6, p, blockquote, pre, address, code, img, dl, dt, dd, ol, ul, li, fieldset, form, label, table, th, td, article, aside, nav, section, figure, figcaption, footer, header, audio, video{
+  margin: 0;
+  padding: 0;
+}
+blockquote, img, fieldset, form{
+  border: 0;
+}
+a, strong, em, b, i, small, sub, sup, img, label, th, td, audio, video{
+  vertical-align: baseline;
+}
+applet, object, iframe, abbr, acronym, big, cite, del, dfn, ins, kbd, q, s, samp, strike, tt, var, u, center, legend, caption, tbody, tfoot, thead, tr, canvas, details, embed, menu, output, ruby, summary, time, mark{
+  margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: baseline;
+  font: inherit;
+  font-size: 100%;
+}
+ul, ol{
+  list-style: none;
+}
+/* Border-box FTW
+https://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/ */
+*, *:before, *:after{
+  box-sizing: inherit;
+}
+html{
+  overflow-y: scroll;
+  box-sizing: border-box;
+  text-size-adjust: 100%;
+}
+a{
+  background-color: transparent;
+  /* Remove the gray background color from active links in IE 10. */
+  -webkit-text-decoration-skip: none;
+}
+a:hover, a:active{
+  outline: 0;
+}
+img{
+  vertical-align: middle;
+}
+strong, b{
+  font-weight: bold;
+}
+em, i{
+  font-style: italic;
+}
+h1, h2, h3, h4, h5, h6{
+  font-weight: bold;
+}
+table{
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+th{
+  font-weight: bold;
+}
+td{
+  vertical-align: top;
+}
+input, select, textarea, button{
+  margin: 0;
+  vertical-align: middle;
+  font-size: 100%;
+  font-family: inherit;
+}
+/**
+ * 1. Add the correct box sizing in IE 10-.
+ * 2. Remove the padding in IE 10-.
+ */
+[type="checkbox"], [type="radio"]{
+  box-sizing: border-box;
+  /* 1 */
+  padding: 0;
+  /* 2 */
+}
+/**
+ * Show the overflow in IE.
+ * 1. Show the overflow in Edge.
+ * 2. Show the overflow in Edge, Firefox, and IE.
+ */
+button, input, select{
+  /* 2 */
+  overflow: visible;
+}
+/**
+ * Address inconsistent `text-transform` inheritance for `button` and `select`.
+ * All other form control elements do not inherit `text-transform` values.
+ * Correct `button` style inheritance in Firefox, IE 8/9/10/11, and Opera.
+ * Correct `select` style inheritance in Firefox.
+ */
+button, select{
+  text-transform: none;
+}
+/**
+ * 1. Prevent a WebKit bug where (2) destroys native `audio` and `video`
+ *    controls in Android 4.
+ * 2. Correct inability to style clickable `input` types in iOS.
+ * 3. Improve usability and consistency of cursor style between image-type
+ *    `input` and others.
+ */
+button, html [type="button"], [type="reset"], [type="submit"]{
+  cursor: pointer;
+  /* 3 */
+  -webkit-appearance: button;
+  /* 2 */
+}
+/**
+ * Remove the inner border and padding in Firefox.
+ */
+button::-moz-focus-inner, input::-moz-focus-inner{
+  padding: 0;
+  border: 0;
+}
+/**
+ * 1. Remove the default vertical scrollbar in IE.
+ */
+textarea{
+  overflow: auto;
+  /* 1 */
+  resize: vertical;
+}
+svg:not(:root){
+  overflow: hidden;
+  /* Correct overflow not hidden in IE. */
+}
+/**
+ * Correct the odd appearance of search inputs in Chrome and Safari.
+ */
+[type="search"]{
+  -webkit-appearance: textfield;
+}
+/**
+ * Remove the inner padding and cancel buttons in Chrome on OS X and
+ * Safari on OS X.
+ */
+[type="search"]::-webkit-search-cancel-button, [type="search"]::-webkit-search-decoration{
+  -webkit-appearance: none;
+}
+/* stylelint-enable */
+
+html, body {
+  height: 100%;
+  width: 100%;
+  min-width: 300px;
+}
+
+body {
+  background: #fff;
+  color: #363636;
+  font: 18px/30px "Arial",sans-serif;
+}
+
+.fonts-loaded body {
+  font-family: "Stem Text","Arial",sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: #ff5e5e
+}
+
+a:visited, a:active{
+  color: #ff5e5e;
+}
+
+a:hover{
+  opacity: 0.8;
+}
+
+h1 {
+  font-size: 70px;
+  line-height: 90px;
+  letter-spacing: 2px;
+  font-weight: bold;
+  width: 100%;
+  text-align: center;
+  text-transform: uppercase;
+  margin-bottom: 22px;
+}
+
+h2 {
+  font-size: 40px;
+  line-height: 50px;
+  letter-spacing: 1.5px;
+  margin: 30px 0 30px 0;
+}
+
+h4 {
+  font-size: 14px;
+  color: #9e9e9e;
+  font-weight: normal;
+}
+
+blockquote {
+  margin: 20px 0;
+  padding: 20px 0;
+  font-weight: bold;
+  border-top: 1px solid #e3e3e3;
+  border-bottom: 1px solid #e3e3e3;
+}
+
+blockquote p {
+  margin: 0;
+}
+
+p {
+  margin: 10px 0;
+}
+
+ul {
+  margin-top: 20px;
+}
+
+input[type="checkbox"] {
+  height: 18px;
+}
+
+input[type="checkbox"] + label {
+  position: relative;
+  min-height: 15px;
+  padding-left: 14px;
+  cursor: pointer;
+  font-weight: normal;
+  line-height: 15px;
+  color: #f64242;
+  font-weight: bold;
+}
+
+.main {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.moto {
+  margin: 20px 0;
+  padding: 20px 0;
+  font-weight: bold;
+  color: #f64242;
+  width: 100%;
+  font-size: 24px;
+  text-align: center;
+  border-top: 1px solid #e3e3e3;
+  border-bottom: 1px solid #e3e3e3;
+}
+
+.caption {
+  font-size: 60%;
+}
+
+.mobile-only {
+  display: none;
+}
+
+.grey-text {
+  color: #9e9e9e;
+}
+
+.content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  position: relative;
+  padding: 60px;
+  box-sizing: border-box;
+  width: 80%;
+  overflow: hidden;
+}
+
+.nav {
+  position: fixed;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  padding: 10px 20px;
+}
+
+.nav--btn {
+  cursor: pointer;
+  height: 60px;
+  text-decoration: none;
+  padding: 0 20px;
+  text-align: center;
+  transition: opacity 200ms;
+  font-weight: bold;
+  font-size: 16px;
+  letter-spacing: 1.5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center
+}
+
+.nav--btn:hover, .nav--btn:focus{
+  opacity: .8;
+  transition: none;
+}
+
+.nav--btn:visited, .nav--btn:hover, .nav--btn:active{
+  color: #ff5e5e;
+}
+
+.nav--btn--icon{
+  margin-right: 16px;
+  margin-top: 6px;
+}
+
+@media (max-width: 800px) and (min-width: 601px) {
+  body {
+    font-size: 3vw;
+    line-height: 5vw;
+  }
+
+  h1 {
+    font-size: 14vw;
+    line-height: 18vw;
+  }
+
+  h2 {
+    font-size: 5vw;
+    line-height: 7vw;
+  }
+
+  h4 {
+    font-size: 2vw;
+  }
+}
+
+
+@media (max-width: 600px) {
+  body {
+    font-size: 4vw;
+    line-height: 6vw;
+  }
+
+  h1 {
+    font-size: 14vw;
+    line-height: 18vw;
+  }
+
+  h2 {
+    font-size: 10vw;
+    line-height: 12vw;
+  }
+
+  h4 {
+    font-size: 3vw;
+  }
+
+  .mobile-only {
+    display:  block;
+  }
+
+  .desktop-only {
+    display: none !important;
+  }
+}
+
+.footer{
+  width: 100%;
+  z-index: 20;
+  padding: 60px;
+  display: flex;
+  justify-content: flex-end;
+  background: #363636;
+  position: relative;
+  overflow: hidden;
+}
+
+.footer h3{
+  color: white;
+  font-weight: normal;
+}
+
+.footer--block{
+  color: white;
+  font-size: 14px;
+  position: relative;
+}
+
+.footer--block.legals{
+  color: #9e9e9e;
+}
+
+.footer--humanoids{
+  position: absolute;
+  bottom: -70px;
+}
+
+.copyright{
+  position: relative;
+}
+
+.copyright:before{
+  content: '©';
+  position: absolute;
+  left: -20px;
+  top: 0;
+  line-height: 10px;
+}
+
+@media (max-width: 600px){
+
+  .footer{
+    flex-direction: column;
+    padding: 60px 30px 30px 30px;
+  }
+
+  .footer--block{
+    margin-bottom: 30px;
+    font-size: 4vw;
+    line-height: 7vw;
+  }
+
+  .footer--block.legals{
+    align-self: center;
+    margin-top: 30px;
+  }
+
+  .copyright{}
+
+  .copyright:before{
+    left: -5vw;
+    line-height: 3vw;
+  }
+}
+
+@keyframes humanoids-blink{
+
+  0%, 48%{
+    transform: scaleY(1);
+  }
+
+  50%{
+    transform: scaleY(0);
+  }
+
+  52%, 100%{
+    transform: scaleY(1);
+  }
+}
+
+.humanoids{
+  position: absolute;
+  bottom: -10px;
+  width: 150px;
+  height: 60px;
+  margin: 0 auto 0 -10px;
+  font-size: 0;
+}
+
+.humanoids circle{
+  transform: scaleY(1);
+  transform-origin: 50%;
+  animation-duration: 8s;
+  animation-name: humanoids-blink;
+  animation-iteration-count: infinite;
+}
+
+.humanoids svg{
+  height: 60px;
+}
+
+.humanoids__human, .humanoids__martian{
+  position: absolute;
+  width: 80px;
+  height: 90px;
+  transition: transform 300ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transform: translateY(0);
+}
+
+.humanoids__human:hover, .humanoids__martian:hover{
+  transform: translateY(-12px);
+}
+
+.humanoids__martian{
+  left: 0;
+}
+
+.humanoids__human{
+  right: 0;
+}
+
+.humanoids__human circle{
+  animation-delay: 0.5s;
+}
+/*
+
+XCode style (c) Angel Garcia <angelgarcia.mail@gmail.com>
+
+*/
+.hljs{
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  background: #fff;
+  color: black;
+}
+.hljs-comment, .hljs-quote{
+  color: #006a00;
+}
+.hljs-keyword, .hljs-selector-tag, .hljs-literal{
+  color: #aa0d91;
+}
+.hljs-name{
+  color: #008;
+}
+.hljs-variable, .hljs-template-variable{
+  color: #660;
+}
+.hljs-string{
+  color: #c41a16;
+}
+.hljs-regexp, .hljs-link{
+  color: #080;
+}
+.hljs-title, .hljs-tag, .hljs-symbol, .hljs-bullet, .hljs-number, .hljs-meta{
+  color: #1c00cf;
+}
+.hljs-section, .hljs-class .hljs-title, .hljs-type, .hljs-attr, .hljs-built_in, .hljs-builtin-name, .hljs-params{
+  color: #5c2699;
+}
+.hljs-attribute, .hljs-subst{
+  color: #000;
+}
+.hljs-formula{
+  background-color: #eee;
+  font-style: italic;
+}
+.hljs-addition{
+  background-color: #baeeba;
+}
+.hljs-deletion{
+  background-color: #ffc8bd;
+}
+.hljs-selector-id, .hljs-selector-class{
+  color: #9b703f;
+}
+.hljs-doctag, .hljs-strong{
+  font-weight: bold;
+}
+.hljs-emphasis{
+  font-style: italic;
+}
+
+/*# sourceMappingURL=main.css.map */
