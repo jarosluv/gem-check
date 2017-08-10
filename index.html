@@ -119,7 +119,7 @@ Amorail::Lead.find ANY_NONEXISTENT_ID
 </ul>
 <p>Where <em>N</em> is typically equal to 2.</p>
 <p>First, kwargs are more readable and do not depend on the order.</p>
-<p>Secondly, kwargs <a href="https://github.com/benoittgt/understand_ruby_memory#why-keywords-arguments-will-create-less-garbage-collected-objects-after-22-answered-">allocate less objects</a>.</p>
+<p>Secondly, kwargs <a href="https://github.com/benoittgt/understand_ruby_memory#why-keywords-arguments-will-create-less-garbage-collected-objects-after-22-answered-">allocate less objects</a> compared with <code>options = {}</code> argument.</p>
 <p>Example:</p>
 <pre><code class="language-ruby"><span class="hljs-comment"># From influxdb-ruby</span>
 
@@ -146,7 +146,7 @@ influxdb.write_point(name, data, <span class="hljs-symbol">precision:</span> pre
 <ul>
 <li><input type="checkbox" id="checkbox6"><label for="checkbox6">Monkey-patch reasonably</label></li>
 </ul>
-<p>Avoid monkey-patching of core classes. Consider using <a href="https://ruby-doc.org/core-2.4.1/doc/syntax/refinements_rdoc.html">Refinements</a> instead (see, for example, <a href="https://github.com/amatsuda/database_rewinder/blob/v0.8.2/lib/database_rewinder/cleaner.rb">database_rewinder</a>).</p>
+<p>Avoid monkey-patching of core classes. Consider using <a href="https://ruby-doc.org/core-2.4.1/doc/syntax/refinements_rdoc.html">Refinements</a> instead (see, for example, <a href="https://github.com/amatsuda/database_rewinder/blob/v0.8.2/lib/database_rewinder/cleaner.rb"><code>database_rewinder</code></a>).</p>
 <p>Patch other non-core libs using <code>Module#prepend</code> (read this exhaustive <a href="https://stackoverflow.com/a/4471202">StackOverflow answer</a>).</p>
 <blockquote>
 <p>Make it hard to shoot yourself in the foot.</p>
@@ -209,7 +209,10 @@ or <em>plugins</em> (like <a href="https://github.com/janko-m/shrine">Shrine</a>
 <ul>
 <li><input type="checkbox" id="checkbox12"><label for="checkbox12">Provide logging functionality (when necessary)</label></li>
 </ul>
-<p>Logging helps people to identify problems but should be <em>controlable</em> (severity levels, custom outputs, (possibly) filtering).</p>
+<p>Logging helps people to identify problems but should be <em>controllable</em> (severity levels, custom outputs, (possibly) filtering).</p>
+<p>The easiest way to provide flexible logging is to allow users to specify the Logger instance themselves:</p>
+<pre><code class="language-ruby">GemCheck.logger = Logger.new(STDOUT)
+</code></pre>
 <p>Avoid <code>puts</code> logging.</p>
 <ul>
 <li><input type="checkbox" id="checkbox13"><label for="checkbox13">Make code testable</label></li>
@@ -224,8 +227,8 @@ or <em>plugins</em> (like <a href="https://github.com/janko-m/shrine">Shrine</a>
 <li><input type="checkbox" id="checkbox14"><label for="checkbox14">Make configuration flexible</label></li>
 </ul>
 <p>Provide different ways to configure your library: <em>manually</em> thru the code, from YAML files or environmental variables.
-See, for example, <a href="https://github.com/aws/aws-sdk-ruby#configuration">aws-sdk</a>.</p>
-<p>Integration libraries <strong>must</strong> support <a href="https://12factor.net"><em>twelve-factor-able</em></a> configuration. You can use <a href="https://github.com/palkan/anyway_config">anyway_config</a> to acomplish this.</p>
+See, for example, <a href="https://github.com/aws/aws-sdk-ruby#configuration"><code>aws-sdk</code></a>.</p>
+<p>Integration libraries <strong>must</strong> support <a href="https://12factor.net"><em>twelve-factor-able</em></a> configuration. You can use <a href="https://github.com/palkan/anyway_config">anyway_config</a> to accomplish this.</p>
 <p>Use sensible defaults for configuration (e.g. for Redis connection it’s good to use <code>localhost:6379</code> by default) and environment variables names (e.g. <code>REDIS_URL</code> for Redis like <a href="https://github.com/mperham/sidekiq/blob/v5.0.0/lib/sidekiq/redis_connection.rb#L100-L102">Sidekiq</a> does).</p>
 <ul>
 <li><input type="checkbox" id="checkbox15"><label for="checkbox15">Manage runtime dependencies carefully</label></li>
@@ -234,7 +237,7 @@ See, for example, <a href="https://github.com/aws/aws-sdk-ruby#configuration">aw
 <p>You don’t need the whole <code>rails</code> if you’re only using <code>active_model</code>.
 You don’t need the whole <code>active_support</code> if you only need a couple of patches (consider using ad-hoc refinements instead).</p>
 <p>Do not add as a dependency library which is only used in some use-cases (e.g. Rails do not add <code>redis</code> as a default dependency, only tells you that you maybe want to add it yourself).</p>
-<p>Monitor your dependencies for CVE (see <a href="https://github.com/rubysec/bundler-audit">bundler-audit</a>).</p>
+<p>Monitor your dependencies for CVE (see <a href="https://github.com/rubysec/bundler-audit">bundler-audit</a>) or let <a href="https://dependencyci.com">DependencyCI</a> to do all the work for you.</p>
 <ul>
 <li><input type="checkbox" id="checkbox16"><label for="checkbox16">Provide interoperability (if it’s possible)</label></li>
 </ul>
@@ -267,8 +270,8 @@ You don’t need the whole <code>active_support</code> if you only need a couple
 <li><input type="checkbox" id="checkbox21"><label for="checkbox21">Keep a changelog</label></li>
 </ul>
 <p>Wondering why? Just read the <a href="http://keepachangelog.com/en/1.0.0/">keepchangelog.com</a>.</p>
-<p>Looking for an automation? Take a look at <a href="https://github.com/skywinder/github-changelog-generato">github-changelog-generator</a>  and <a href="https://github.com/egoist/loglive">loglive</a>.</p>
-<p>Your commits history is also a kind of changelog, so use meaningful messages (<a href="https://github.com/bkuhlmann/git-cop">git-cop</a> can help you with it).</p>
+<p>Looking for an automation? Take a look at <a href="https://github.com/skywinder/github-changelog-generato"><code>github-changelog-generator</code></a>  and <a href="https://github.com/egoist/loglive"><code>loglive</code></a>.</p>
+<p>Your commits history is also a kind of changelog, so use meaningful messages (<a href="https://github.com/bkuhlmann/git-cop"><code>git-cop</code></a> can help you with it).</p>
 <ul>
 <li><input type="checkbox" id="checkbox22"><label for="checkbox22">Provide upgrade notes</label></li>
 </ul>
@@ -286,7 +289,7 @@ You don’t need the whole <code>active_support</code> if you only need a couple
 <li><input type="checkbox" id="checkbox24"><label for="checkbox24">Make development process less painful</label></li>
 </ul>
 <p>Sooner or later people will try to contribute to your work. Is your development process transparent or it requires a lot of effort to setup?</p>
-<p>For example, Rails has a <a href="https://github.com/rails/rails-dev-box">rails-dev-box</a> to help you to start developing easily.</p>
+<p>For example, Rails has a <a href="https://github.com/rails/rails-dev-box"><code>rails-dev-box</code></a> to help you to start developing easily.</p>
 <p><a href="https://www.docker.com">Docker</a> is also a good way to make dependency management simpler.</p>
 
       </div>
